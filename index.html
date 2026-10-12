@@ -80,15 +80,6 @@ a.fallback{display:block;padding:12px;background:#f0e8ff;border-radius:8px;color
   <h3>Total / మొత్తం: <span id="cartTotal">₹0</span></h3>
   <p class="small">Please check your product quantities before paying.</p>
   <button type="button" class="pay" id="payButton">Pay Now / ఇప్పుడే చెల్లించండి</button>
-  <div style="text-align:center; margin:20px auto; padding:15px;">
-  <h3>Scan to Pay / చెల్లించడానికి స్కాన్ చేయండి</h3>
-  <p>Open PhonePe, Google Pay or Paytm and scan this QR code.</p>
-  <img
-    src="payment-qr.png"
-    alt="NPS Traders Payment QR Code"
-    style="width:220px; max-width:100%; height:auto;"
-  >
-  <p>Verify the recipient name before paying.</p>
 </div>
   <div style="text-align:center; margin:20px auto; padding:15px;">
   <h3>Scan to Pay / చెల్లించడానికి స్కాన్ చేయండి</h3>
@@ -304,17 +295,19 @@ function renderCart() {
 function payUPI() {
   const amount = getTotal();
 
-  if (amount <= 0) {
+  if (!Number.isFinite(amount) || amount <= 0) {
     alert("Please add a product to your cart first. / ముందుగా ఉత్పత్తిని కార్ట్‌లో చేర్చండి.");
     return;
   }
 
-  const params = new URLSearchParams({
-    pa: UPI_ID,
-    pn: MERCHANT_NAME,
-    am: amount.toFixed(2),
-    cu: "INR",
-    tn: "NPS Traders Order"
+  const upiLink =
+    "upi://pay?pa=" + encodeURIComponent(UPI_ID) +
+    "&pn=" + encodeURIComponent(MERCHANT_NAME) +
+    "&am=" + encodeURIComponent(amount.toFixed(2)) +
+    "&cu=INR" +
+    "&tn=" + encodeURIComponent("NPS Traders Order");
+
+  window.location.href = upiLink;
   });
 
   const upiLink = "upi://pay?" + params.toString();
