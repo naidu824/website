@@ -57,7 +57,7 @@ a.fallback{display:block;padding:12px;background:#f0e8ff;border-radius:8px;color
 </nav>
 
 <section id="home" class="hero">
-  <img src="hero.jpg" alt="NPS Traders Products"
+  <img src="Hero.jpg" alt="NPS Traders Products"
        onerror="this.style.display='none'">
   <h2>Welcome to NPS Traders</h2>
   <p>మీ NPS Traders కు స్వాగతం!</p>
@@ -80,20 +80,9 @@ a.fallback{display:block;padding:12px;background:#f0e8ff;border-radius:8px;color
   <h3>Total / మొత్తం: <span id="cartTotal">₹0</span></h3>
   <p class="small">Please check your product quantities before paying.</p>
   <button type="button" class="pay" id="payButton">Pay Now / ఇప్పుడే చెల్లించండి</button>
-</div>
-  <div style="text-align:center; margin:20px auto; padding:15px;">
-  <h3>Scan to Pay / చెల్లించడానికి స్కాన్ చేయండి</h3>
-  <p>Open PhonePe, Google Pay or Paytm and scan this QR code.</p>
-  <img
-    src="payment-qr.png"
-    alt="NPS Traders Payment QR Code"
-    style="width:220px; max-width:100%; height:auto;"
-  >
-  <p>Verify the recipient name before paying.</p>
-</div>
   <div id="paymentMessage" class="small"></div>
   <a id="upiFallback" class="fallback" href="#" style="display:none">Tap here to open your UPI app / UPI యాప్ తెరవండి</a>
-  <p class="small">UPI ID: 9381680127@apl</p>
+  <p class="small">UPI ID: 9381680127-4@axl</p>
   <p class="small">If tapping Pay Now does nothing, use the link above. If no UPI app opens, test on a phone with a compatible UPI app installed.</p>
 </div>
 </section>
@@ -164,21 +153,21 @@ a.fallback{display:block;padding:12px;background:#f0e8ff;border-radius:8px;color
  Google Apps Script Web App URL ending in /exec.
  Without it, online order saving and phone tracking will not work.
 */
-const API_URL = "https://script.google.com/macros/s/AKfycbyoWgXBWElrUvwQO2FZWgzUzQlRVGBeUUHPs1RL0n8LTXIHBru5KVE766-xmxDTtWAr/exec";
+const API_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 const UPI_ID = "9381680127-4@axl";
 const MERCHANT_NAME = "NPS Traders";
 const PRICE = 450;
 
 const products = [
-  {id:"sugar", name:"Sugar Control Product", te:"షుగర్ కంట్రోల్ ఉత్పత్తి", image:"sugar.jpg"},
-  {id:"dental", name:"Dental Health Product", te:"దంత ఆరోగ్య ఉత్పత్తి", image:"dental.jpg"},
-  {id:"body", name:"Body Pain Product", te:"శరీర నొప్పుల ఉత్పత్తి", image:"body-pains.jpg"},
-  {id:"kidney", name:"Kidney Stones Product", te:"కిడ్నీ స్టోన్స్ ఉత్పత్తి", image:"kidney.jpg"},
-  {id:"agarbatti", name:"Agarbattis / Incense Sticks", te:"అగరబత్తీలు", image:"agarbatti.jpg"},
-  {id:"sexual", name:"Sexual Wellness Product", te:"లైంగిక ఆరోగ్య ఉత్పత్తి", image:"sexual-wellness.png"},
-  {id:"bp", name:"Blood Pressure Product", te:"బ్లడ్ ప్రెషర్ ఉత్పత్తి", image:"bp.png"},
-  {id:"knee", name:"Knee Pain Product", te:"మోకాలి నొప్పి ఉత్పత్తి", image:"knee-pain.jpg"}
+  {id:"sugar", name:"Sugar Control Product", te:"షుగర్ కంట్రోల్ ఉత్పత్తి", image:"Sugar.jpg"},
+  {id:"dental", name:"Dental Health Product", te:"దంత ఆరోగ్య ఉత్పత్తి", image:"Dental.jpg"},
+  {id:"body", name:"Body Pain Product", te:"శరీర నొప్పుల ఉత్పత్తి", image:"Body-pains.jpg"},
+  {id:"kidney", name:"Kidney Stones Product", te:"కిడ్నీ స్టోన్స్ ఉత్పత్తి", image:"Kidney.jpg"},
+  {id:"agarbatti", name:"Agarbattis / Incense Sticks", te:"అగరబత్తీలు", image:"Agarbatti.jpg"},
+  {id:"sexual", name:"Sexual Wellness Product", te:"లైంగిక ఆరోగ్య ఉత్పత్తి", image:"Sexual-Wellness.png"},
+  {id:"bp", name:"Blood Pressure Product", te:"బ్లడ్ ప్రెషర్ ఉత్పత్తి", image:"BP.png"},
+  {id:"knee", name:"Knee Pain Product", te:"మోకాలి నొప్పి ఉత్పత్తి", image:"Knee-pain.jpg"}
 ];
 
 const cart = {};
@@ -295,19 +284,17 @@ function renderCart() {
 function payUPI() {
   const amount = getTotal();
 
-  if (!Number.isFinite(amount) || amount <= 0) {
+  if (amount <= 0) {
     alert("Please add a product to your cart first. / ముందుగా ఉత్పత్తిని కార్ట్‌లో చేర్చండి.");
     return;
   }
 
-  const upiLink =
-    "upi://pay?pa=" + encodeURIComponent(UPI_ID) +
-    "&pn=" + encodeURIComponent(MERCHANT_NAME) +
-    "&am=" + encodeURIComponent(amount.toFixed(2)) +
-    "&cu=INR" +
-    "&tn=" + encodeURIComponent("NPS Traders Order");
-
-  window.location.href = upiLink;
+  const params = new URLSearchParams({
+    pa: UPI_ID,
+    pn: MERCHANT_NAME,
+    am: amount.toFixed(2),
+    cu: "INR",
+    tn: "NPS Traders Order"
   });
 
   const upiLink = "upi://pay?" + params.toString();
