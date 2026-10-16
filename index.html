@@ -1,465 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NPS Traders | ఎన్‌పీఎస్ ట్రేడర్స్</title>
-
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f7f8f3;color:#222}
-header{background:#14532d;color:white;padding:15px;text-align:center}
-header img{width:85px;height:85px;object-fit:contain;background:white;border-radius:10px}
-header h1{margin:8px 0}
-nav{background:#0f3d22;padding:12px;text-align:center}
-nav a{color:white;text-decoration:none;margin:8px;font-weight:bold}
-.hero{width:100%;max-height:450px;object-fit:cover;display:block}
-.container{max-width:1150px;margin:auto;padding:15px}
-h2{text-align:center;color:#14532d}
-.cartbar{background:white;padding:14px;text-align:center;position:sticky;top:0;z-index:5;border-bottom:1px solid #ddd}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.card{background:white;border:1px solid #ddd;border-radius:12px;overflow:hidden;padding:12px}
-.card img{width:100%;height:170px;object-fit:contain}
-.card h3{margin:8px 0;color:#14532d}
-.telugu{margin:5px 0}
-.price{font-weight:bold;color:#a16207;font-size:19px;margin:10px 0}
-.quantity{display:flex;align-items:center;justify-content:center;gap:15px;margin:12px}
-.quantity button{width:38px;height:38px;font-size:24px;border:0;border-radius:7px;background:#166534;color:white}
-.qty{font-weight:bold;font-size:20px;min-width:20px;text-align:center}
-button,.button{cursor:pointer;border:0;border-radius:7px;padding:11px;background:#166534;color:white;font-weight:bold}
-button:disabled{opacity:.6}
-.panel{background:white;padding:18px;border-radius:12px;margin:22px 0;border:1px solid #ddd}
-input,textarea{width:100%;padding:12px;margin:6px 0 12px;border:1px solid #bbb;border-radius:7px;font:inherit}
-textarea{min-height:90px}
-.paygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.paycard{border:1px solid #ddd;border-radius:10px;padding:15px;text-align:center}
-.qr{width:200px;max-width:100%;height:auto;display:block;margin:10px auto}
-.small{font-size:13px;color:#555}
-.result{padding:12px;border-radius:8px;margin-top:12px;white-space:pre-wrap;overflow-wrap:anywhere}
-.success{background:#e5f6e7;color:#14532d}
-.error{background:#ffe8e8;color:#9f1239}
-.ordercard{border:1px solid #ddd;border-radius:10px;padding:12px;margin:12px 0;background:white}
-footer{background:#14532d;color:white;text-align:center;padding:22px}
-@media(max-width:500px){nav a{display:inline-block}.container{padding:10px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPS Traders - Wellness Products & Tracking</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7f6; color: #333; }
+        header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+        .container { max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid #2c3e50; padding-bottom: 5px; color: #2c3e50; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .product-card { background: #fafafa; border: 1px solid #ddd; padding: 15px; border-radius: 6px; text-align: center; }
+        .product-card h4 { margin: 10px 0 5px 0; }
+        button { background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #219653; }
+        input, textarea { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        .qr-section { text-align: center; margin: 15px 0; background: #fff3cd; padding: 15px; border-radius: 6px; border: 1px solid #ffeeba; }
+        .qr-section img { width: 180px; height: 180px; margin-top: 10px; border: 2px solid #ccc; border-radius: 4px; }
+        .payment-info-box { background: white; padding: 12px; border-radius: 6px; border: 1px solid #ddd; margin-top: 12px; text-align: left; }
+        .payment-row { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 14px; }
+        .copy-btn { background: #2980b9; padding: 6px 12px; font-size: 12px; border-radius: 4px; cursor: pointer; }
+        .copy-btn:hover { background: #1f618d; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 14px; }
+        th { background: #2c3e50; color: white; }
+        .tracking-result { margin-top: 15px; }
+    </style>
 </head>
-
 <body>
 
-<header>
-  <img src="logo.png" alt="NPS Traders Logo">
-  <h1>NPS Traders | ఎన్‌పీఎస్ ట్రేడర్స్</h1>
-  <p>Ayurvedic Products & Agarbattis | ఆయుర్వేద ఉత్పత్తులు & అగరబత్తీలు</p>
-</header>
-
-<nav>
-  <a href="#products">Products</a>
-  <a href="#payment">Payment</a>
-  <a href="#order">Place Order</a>
-  <a href="#tracking">Track Order</a>
-</nav>
-
-<img class="hero" src="hero.jpg" alt="NPS Traders Banner">
-
-<div class="cartbar">
-  <strong>Cart / కార్ట్: <span id="cartCount">0</span> items</strong>
-  &nbsp; | &nbsp;
-  <strong>Total / మొత్తం: ₹<span id="cartTotal">0</span></strong>
-  &nbsp;
-  <button type="button" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">
-    Checkout / ఆర్డర్
-  </button>
-</div>
-
-<main class="container">
-
-<h2 id="products">Our Products / మా ఉత్పత్తులు</h2>
-
-<div class="products" id="productGrid"></div>
-
-<section class="panel" id="payment">
-<h2>Payment Details / చెల్లింపు వివరాలు</h2>
-
-<div class="paygrid">
-
-  <div class="paycard">
-    <h3>UPI ID / యూపీఐ ఐడీ</h3>
-    <p id="upiText">9381680127@apl</p>
-    <button type="button" onclick="copyValue('9381680127@apl')">
-      Copy UPI ID / కాపీ చేయండి
-    </button>
-  </div>
-
-  <div class="paycard">
-    <h3>Phone Number / ఫోన్ నంబర్</h3>
-    <p>9381680127</p>
-    <button type="button" onclick="copyValue('9381680127')">
-      Copy Number / నంబర్ కాపీ
-    </button>
-  </div>
-
-  <div class="paycard">
-    <h3>QR Code / QR కోడ్</h3>
-    <img class="qr" src="payment-qr.png" alt="Payment QR Code">
-    <a class="button" href="payment-qr.png" download="NPS-Traders-QR.png">
-      Download QR / QR డౌన్‌లోడ్
-    </a>
-  </div>
-
-</div>
-
-<p id="copyMessage" class="small"></p>
-
-<p>
-Pay using your UPI app and upload the payment screenshot below.
-Payment is manually verified by NPS Traders.
-</p>
-<p>
-మీ UPI యాప్ ద్వారా చెల్లించి, చెల్లింపు స్క్రీన్‌షాట్‌ను అప్‌లోడ్ చేయండి.
-చెల్లింపును NPS Traders పరిశీలిస్తుంది.
-</p>
-</section>
-
-<section class="panel" id="order">
-<h2>Place Your Order / మీ ఆర్డర్ నమోదు చేయండి</h2>
-
-<p><strong>Selected Products / ఎంచుకున్న ఉత్పత్తులు</strong></p>
-<div id="orderSummary">Cart is empty / కార్ట్ ఖాళీగా ఉంది</div>
-
-<form id="orderForm">
-
-<label>Full Name / పూర్తి పేరు *</label>
-<input id="customerName" required maxlength="100">
-
-<label>Phone Number / ఫోన్ నంబర్ *</label>
-<input id="phone" required inputmode="numeric"
-pattern="[0-9]{10}" maxlength="10">
-
-<label>Full Address / పూర్తి చిరునామా *</label>
-<textarea id="address" required maxlength="500"></textarea>
-
-<label>PIN Code / పిన్ కోడ్ *</label>
-<input id="pin" required inputmode="numeric"
-pattern="[0-9]{6}" maxlength="6">
-
-<label>Booking Date / బుకింగ్ తేదీ *</label>
-<input id="bookingDate" type="date" required>
-
-<label>Payment Screenshot / చెల్లింపు స్క్రీన్‌షాట్ (Max 3 MB) *</label>
-<input id="paymentScreenshot" type="file" accept="image/*" required>
-
-<p class="small">
-Check your selected products and total before submitting.
-ఆర్డర్ పంపే ముందు ఉత్పత్తులు మరియు మొత్తం పరిశీలించండి.
-</p>
-
-<button id="submitBtn" type="submit">Submit Order / ఆర్డర్ పంపండి</button>
-
-<div id="orderResult" role="status"></div>
-</form>
-</section>
-
-<section class="panel" id="tracking">
-<h2>Track Your Order / మీ ఆర్డర్ ట్రాక్ చేయండి</h2>
-
-<p>
-Enter the same phone number used for ordering.
-ఆర్డర్ ఇచ్చినప్పుడు ఉపయోగించిన ఫోన్ నంబర్ నమోదు చేయండి.
-</p>
-
-<form id="trackingForm">
-<label>Phone Number / ఫోన్ నంబర్</label>
-<input id="trackingPhone" required inputmode="numeric"
-pattern="[0-9]{10}" maxlength="10">
-
-<button id="trackBtn" type="submit">Track Order / ట్రాక్ చేయండి</button>
-</form>
-
-<div id="trackingResult" role="status"></div>
-<div id="trackingOrders"></div>
-</section>
-
-</main>
-
-<footer>
-<strong>NPS Traders | ఎన్‌పీఎస్ ట్రేడర్స్</strong>
-<p>Ayurvedic Products & Agarbattis</p>
-</footer>
-
-<script>
-"use strict";
-
-/* Keep this URL identical to your deployed Apps Script URL. */
-const API_URL =
-"https://script.google.com/macros/s/AKfycbyEH2YWPvMOWV6wP3bNDhTCWPgb982FdJ3TK0sY_wRxU_LwGwCkSFp8vUSt-g-IDSx3Zw/exec";
-
-const products = [
- {id:"sugar",name:"Sugar Control Medicine",te:"షుగర్ కంట్రోల్ మందు",price:450,image:"sugar.jpg"},
- {id:"dental",name:"Dental Health Product",te:"దంత ఆరోగ్య ఉత్పత్తి",price:450,image:"dental.jpg"},
- {id:"body",name:"Body Pain Relief Product",te:"శరీర నొప్పుల ఉపశమన ఉత్పత్తి",price:450,image:"body-pains.jpg"},
- {id:"kidney",name:"Kidney Stones Product",te:"కిడ్నీ రాళ్ల ఉత్పత్తి",price:450,image:"kidney.jpg"},
- {id:"agarbatti",name:"Agarbattis / Incense Sticks",te:"అగరబత్తీలు",price:450,image:"agarbatti.jpg"},
- {id:"wellness",name:"Sexual Wellness Product",te:"లైంగిక ఆరోగ్య ఉత్పత్తి",price:450,image:"sexual-wellness.png"},
- {id:"bp",name:"Blood Pressure (BP) Product",te:"బీపీ ఉత్పత్తి",price:450,image:"bp.png"},
- {id:"knee",name:"Knee Pain Product",te:"మోకాలి నొప్పి ఉత్పత్తి",price:450,image:"knee-pain.jpg"}
-];
-
-/* Every product starts at quantity ZERO. */
-const quantities = {};
-products.forEach(p => quantities[p.id] = 0);
-
-function escapeHTML(value) {
- return String(value ?? "").replace(/[&<>"']/g, c => ({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
-}
-
-function renderProducts() {
- document.getElementById("productGrid").innerHTML = products.map(p => `
-  <article class="card">
-   <img src="${p.image}" alt="${escapeHTML(p.name)}">
-   <h3>${escapeHTML(p.name)}</h3>
-   <p class="telugu">${escapeHTML(p.te)}</p>
-   <div class="price">₹${p.price}</div>
-   <div class="quantity">
-    <button type="button" aria-label="Decrease quantity"
-      onclick="changeQuantity('${p.id}',-1)">−</button>
-    <span class="qty" id="qty-${p.id}">0</span>
-    <button type="button" aria-label="Increase quantity"
-      onclick="changeQuantity('${p.id}',1)">+</button>
-   </div>
-  </article>
- `).join("");
- updateCart();
-}
-
-function changeQuantity(id,change) {
- quantities[id] = Math.max(0,quantities[id] + change);
- document.getElementById("qty-"+id).textContent = quantities[id];
- updateCart();
-}
-
-function getCart() {
- return products.filter(p => quantities[p.id] > 0)
-  .map(p => ({...p,quantity:quantities[p.id],lineTotal:p.price*quantities[p.id]}));
-}
-
-function updateCart() {
- const cart = getCart();
- const count = cart.reduce((s,p)=>s+p.quantity,0);
- const total = cart.reduce((s,p)=>s+p.lineTotal,0);
-
- document.getElementById("cartCount").textContent = count;
- document.getElementById("cartTotal").textContent = total;
-
- document.getElementById("orderSummary").textContent = cart.length
-  ? cart.map(p=>`${p.name} / ${p.te} × ${p.quantity} = ₹${p.lineTotal}`).join("\n")
-    + "\nTotal / మొత్తం: ₹" + total
-  : "Cart is empty / కార్ట్ ఖాళీగా ఉంది";
-}
-
-async function copyValue(value) {
- try {
-  await navigator.clipboard.writeText(value);
-  document.getElementById("copyMessage").textContent = "Copied / కాపీ అయింది: " + value;
- } catch(e) {
-  window.prompt("Copy this text / కాపీ చేయండి",value);
- }
-}
-
-function showMessage(id,message,success) {
- const el=document.getElementById(id);
- el.className="result "+(success?"success":"error");
- el.textContent=message;
-}
-
-function readFileBase64(file) {
- return new Promise((resolve,reject)=>{
-  const reader=new FileReader();
-  reader.onload=()=>resolve(String(reader.result).split(",")[1]);
-  reader.onerror=()=>reject(new Error("Cannot read screenshot."));
-  reader.readAsDataURL(file);
- });
-}
-
-/* Submit every order as a new request. The Apps Script appends a new row. */
-document.getElementById("orderForm").addEventListener("submit",async function(e) {
- e.preventDefault();
-
- const cart=getCart();
- if(!cart.length) {
-  showMessage("orderResult","Please select at least one product. / కనీసం ఒక ఉత్పత్తిని ఎంచుకోండి.",false);
-  return;
- }
-
- const file=document.getElementById("paymentScreenshot").files[0];
- if(!file) {
-  showMessage("orderResult","Upload payment screenshot. / చెల్లింపు స్క్రీన్‌షాట్ అప్‌లోడ్ చేయండి.",false);
-  return;
- }
- if(file.size>3*1024*1024) {
-  showMessage("orderResult","Screenshot must be 3 MB or smaller. / స్క్రీన్‌షాట్ 3 MB లోపు ఉండాలి.",false);
-  return;
- }
-
- const button=document.getElementById("submitBtn");
- button.disabled=true;
- button.textContent="Submitting…";
-
- try {
-  const payload={
-   customerName:document.getElementById("customerName").value.trim(),
-   phone:document.getElementById("phone").value.trim(),
-   address:document.getElementById("address").value.trim(),
-   pin:document.getElementById("pin").value.trim(),
-   bookingDate:document.getElementById("bookingDate").value,
-   items:cart.map(p=>({
-    id:p.id,name:p.name,te:p.te,quantity:p.quantity,price:p.price,lineTotal:p.lineTotal
-   })),
-   total:cart.reduce((s,p)=>s+p.lineTotal,0),
-   screenshotName:file.name,
-   screenshotType:file.type||"image/jpeg",
-   screenshotBase64:await readFileBase64(file)
-  };
-
-  /*
-   * no-cors does not allow the browser to read the response.
-   * Confirm that the new order appears in Google Sheets before retrying,
-   * to avoid accidentally placing duplicate orders.
-   */
-  await fetch(API_URL,{
-   method:"POST",
-   mode:"no-cors",
-   headers:{"Content-Type":"text/plain;charset=utf-8"},
-   body:JSON.stringify(payload)
-  });
-
-  showMessage(
-   "orderResult",
-   "Order request sent. Please check the Orders Google Sheet before submitting again. Payment will be verified manually. / ఆర్డర్ అభ్యర్థన పంపబడింది. మళ్లీ పంపే ముందు Google Sheet పరిశీలించండి.",
-   true
-  );
- } catch(err) {
-  showMessage("orderResult","Could not send the request. Check internet connection. / ఆర్డర్ పంపలేకపోయాం.",false);
- } finally {
-  button.disabled=false;
-  button.textContent="Submit Order / ఆర్డర్ పంపండి";
- }
-});
-
-/*
- * JSONP tracking: Apps Script must return callbackName({...});
- * The web app must be deployed with access set to Anyone.
- */
-function requestTracking(phone) {
-  return new Promise((resolve, reject) => {
-    const callback =
-      "npsCallback_" + Date.now() + "_" +
-      Math.floor(Math.random() * 100000);
-
-    const script = document.createElement("script");
-    const url = new URL(API_URL);
-
-    url.searchParams.set("action", "status");
-    url.searchParams.set("phone", phone);
-    url.searchParams.set("callback", callback);
-    url.searchParams.set("_", Date.now());
-
-    let finished = false;
-
-    const timer = setTimeout(() => {
-      cleanup();
-      reject(new Error("Tracking timed out. Please try again."));
-    }, 30000);
-
-    function cleanup() {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timer);
-      delete window[callback];
-      script.remove();
-    }
-
-    window[callback] = function(data) {
-      cleanup();
-      resolve(data);
-    };
-
-    script.onerror = function() {
-      cleanup();
-      reject(
-        new Error(
-          "Phone browser could not load the tracking service. " +
-          "Please check your internet connection and try again."
-        )
-      );
-    };
-
-    script.src = url.toString();
-    document.body.appendChild(script);
-  });
-}
-
-  
-
-
-document.getElementById("trackingForm").addEventListener("submit",async function(e) {
- e.preventDefault();
-
- const phone=document.getElementById("trackingPhone").value.trim();
- if(!/^[0-9]{10}$/.test(phone)) {
-  showMessage("trackingResult","Enter a valid 10-digit phone number. / సరైన 10 అంకెల నంబర్ ఇవ్వండి.",false);
-  return;
- }
-
- const button=document.getElementById("trackBtn");
- button.disabled=true;
- button.textContent="Checking…";
- document.getElementById("trackingOrders").innerHTML="";
-
- try {
-  const result=await requestTracking(phone);
-
-  if(!result || result.success!==true) {
-   throw new Error(result && result.message ? result.message : "Unexpected Apps Script response.");
-  }
-
-  const orders=Array.isArray(result.orders)?result.orders:[];
-  if(!orders.length) {
-   showMessage("trackingResult","No orders found for this number. / ఈ నంబర్‌కు ఆర్డర్లు కనిపించలేదు.",true);
-   return;
-  }
-
-  showMessage("trackingResult","Found "+orders.length+" order(s). / "+orders.length+" ఆర్డర్లు కనిపించాయి.",true);
-
-  document.getElementById("trackingOrders").innerHTML=orders.slice().reverse().map(o=>`
-   <div class="ordercard">
-    <p><strong>Order ID:</strong> ${escapeHTML(o["Order ID"]||"Not assigned")}</p>
-    <p><strong>Booking Date:</strong> ${escapeHTML(o["Booking Date"]||"")}</p>
-    <p><strong>Products:</strong><br>${escapeHTML(o["Products"]||o["Items"]||"").replace(/\n/g,"<br>")}</p>
-    <p><strong>Total:</strong> ₹${escapeHTML(o["Total"]||"0")}</p>
-    <p><strong>Payment Status:</strong> ${escapeHTML(o["Payment Status"]||"Pending Verification")}</p>
-    <p><strong>Order Status:</strong> ${escapeHTML(o["Order Status"]||"Order Received")}</p>
-    <p><strong>Postal Tracking Number:</strong> ${escapeHTML(o["Postal Tracking Number"]||o["Tracking Number"]||"Not updated yet")}</p>
-    <p><strong>Postman Name:</strong> ${escapeHTML(o["Postman Name"]||"Not updated yet")}</p>
-    <p><strong>Postman Phone:</strong> ${escapeHTML(o["Postman Phone"]||"Not updated yet")}</p>
-   </div>
-  `).join("");
-
- } catch(err) {
-  showMessage("trackingResult",
-   "Tracking connection failed: "+err.message+
-   " Please check Apps Script Web App access. / ట్రాకింగ్ కనెక్షన్ విఫలమైంది.",
-   false
-  );
- } finally {
-  button.disabled=false;
-  button.textContent="Track Order / ట్రాక్ చేయండి";
- }
-});
-
-document.getElementById("bookingDate").value=new Date().toISOString().slice(0,10);
-renderProducts();
-</script>
+    <header>
+        <h1>NPS Traders</h1>
+        <p>Natural Wellness Products & Organic Goods | సహజ ఆరోగ్య ఉత్పత్తులు</p>
+    </header>
+
+    <div class="container">
+        <!-- Products Section -->
+        <h2>1. Select Products / ఉత్పత్తులను ఎంచుకోండి</h2>
+        <div class="product-grid" id="productGrid">
+            <!-- Products loaded via JS -->
+        </div>
+
+        <!-- Cart & Checkout Form -->
+        <h2>2. Checkout & Payment / చెల్లింపు వివరాలు</h2>
+        <div id="cartSummary">
+            <p><strong>Selected Items:</strong> <span id="cartItemsText">None</span></p>
+            <p><strong>Total Amount: ₹<span id="cartTotal">0</span></strong></p>
+        </div>
+
+        <form id="orderForm">
+            <label>Customer Name / పేరు:</label>
+            <input type="text" id="customerName" required placeholder="Enter your full name">
+
+            <label>Phone Number / ఫోన్ నంబర్:</label>
+            <input type="tel" id="phone" required placeholder="10-digit mobile number">
+
+            <label>Delivery Address / చిరునామా:</label>
+            <textarea id="address" required placeholder="House No, Street, City, State"></textarea>
+
+            <label>PIN Code / పిన్ కోడ్:</label>
+            <input type="text" id="pin" required placeholder="6-digit PIN code">
+
+            <!-- UPI Payment Section (QR Code, Phone, and UPI ID with Copy Buttons) -->
+            <div class="qr-section">
+                <p><strong>Scan QR Code to Pay via UPI / UPI ద్వారా చెల్లించడానికి స్క్రీన్ చేయండి</strong></p>
+                <img src="payment-qr.png" alt="Payment QR Code">
+                
+                <div class="payment-info-box">
+                    <div class="payment-row">
+                        <span><strong>Phone:</strong> 9381680127</span>
+                        <button type="button" class="copy-btn" onclick="copyToClipboard('9381680127', 'Phone number copied!')">Copy Phone</button>
+                    </div>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 6px 0;">
+                    <div class="payment-row">
+                        <span><strong>UPI ID:</strong> 9381680127@axl</span>
+                        <button type="button" class="copy-btn" onclick="copyToClipboard('9381680127@axl', 'UPI ID copied!')">Copy UPI ID</button>
+                    </div>
+                </div>
+
+                <p style="font-size: 13px; color: #555; margin-top: 10px;">After payment, upload your screenshot below / చెల్లింపు తర్వాత స్క్రీన్‌షాట్‌ను అప్‌లోడ్ చేయండి</p>
+            </div>
+
+            <label>Upload Payment Screenshot / చెల్లింపు స్క్రీన్‌షాట్ అప్‌లోడ్ చేయండి:</label>
+            <input type="file" id="paymentFile" accept="image/*" required>
+
+            <button type="submit" style="width: 100%; margin-top: 15px; font-size: 16px;">Place Order / ఆర్డర్ చేయండి</button>
+        </form>
+    </div>
+
+    <!-- Order Tracking Section -->
+    <div class="container">
+        <h2>3. Track Your Order / మీ ఆర్డర్‌ని ట్రాక్ చేయండి</h2>
+        <label>Enter Phone Number / మీ ఫోన్ నంబర్ నమోదు చేయండి:</label>
+        <input type="tel" id="trackPhone" placeholder="Enter your registered phone number">
+        <button onclick="trackOrder()" style="width: 100%;">Track Order / ట్రాక్ చేయండి</button>
+
+        <div class="tracking-result" id="trackingResult"></div>
+    </div>
+
+    <script>
+        // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW BETWEEN THE QUOTES !!!
+        const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+        // 8 Wellness Products List (English & Telugu)
+        const products = [
+            { id: 1, name: "Organic Honey / ఆర్గానిక్ తేనె", price: 350 },
+            { id: 2, name: "A2 Cow Ghee / ఆవు నెయ్యి", price: 650 },
+            { id: 3, name: "Cold Pressed Coconut Oil / కొబ్బరి నూనె", price: 300 },
+            { id: 4, name: "Moringa Powder / ములగాకు పొడి", price: 200 },
+            { id: 5, name: "Natural Turmeric Powder / పసుపు పొడి", price: 180 },
+            { id: 6, name: "Millets Health Mix / చిరుధాన్యాల మిశ్రమం", price: 250 },
+            { id: 7, name: "Amla Juice / ఉసిరి రసం", price: 220 },
+            { id: 8, name: "Herbal Hair Oil / మూలికా తైలం", price: 280 }
+        ];
+
+        let cart = {};
+
+        // Helper function to copy text to clipboard with alert
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert(message);
+            }, function(err) {
+                alert("Failed to copy: " + err);
+            });
+        }
+
+        // Render Products on Page
+        function loadProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map(p => `
+                <div class="product-card">
+                    <h4>${p.name}</h4>
+                    <p>₹${p.price}</p>
+                    <button type="button" onclick="addToCart(${p.id})">Add / జోడించు</button>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(id) {
+            cart[id] = (cart[id] || 0) + 1;
+            updateCartSummary();
+        }
+
+        function updateCartSummary() {
+            let total = 0;
+            let itemsDesc = [];
+            for (let id in cart) {
+                let prod = products.find(p => p.id == id);
+                let qty = cart[id];
+                total += prod.price * qty;
+                itemsDesc.push(`${prod.name} (x${qty})`);
+            }
+            document.getElementById('cartItemsText').innerText = itemsDesc.length > 0 ? itemsDesc.join(', ') : 'None';
+            document.getElementById('cartTotal').innerText = total;
+        }
+
+        // Handle Order Submission with Screenshot File Reader
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (Object.keys(cart).length === 0) {
+                alert("Please select at least one product! / దయచేసి ఏదైనా ఒక ఉత్పత్తిని ఎంచుకోండి!");
+                return;
+            }
+
+            let fileInput = document.getElementById('paymentFile');
+            let file = fileInput.files[0];
+
+            if (!file) {
+                alert("Please upload the payment screenshot! / దయచేసి చెల్లింపు స్క్రీన్‌షాట్‌ను అప్‌లోడ్ చేయండి!");
+                return;
+            }
+
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                let base64String = event.target.result;
+
+                let itemsArray = [];
+                let grandTotal = 0;
+                for (let id in cart) {
+                    let prod = products.find(p => p.id == id);
+                    let qty = cart[id];
+                    grandTotal += prod.price * qty;
+                    itemsArray.push({ name: prod.name, quantity: qty });
+                }
+
+                let payload = {
+                    customerName: document.getElementById('customerName').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    pin: document.getElementById('pin').value,
+                    items: itemsArray,
+                    total: grandTotal,
+                    fileData: base64String,
+                    fileName: file.name,
+                    mimeType: file.type
+                };
+
+                alert("Submitting order, please wait... / ఆర్డర్ సమర్పించబడుతోంది...");
+
+                fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(() => {
+                    alert("Order placed successfully! / ఆర్డర్ విజయవంతంగా చేయబడింది!");
+                    document.getElementById('orderForm').reset();
+                    cart = {};
+                    updateCartSummary();
+                })
+                .catch(err => {
+                    alert("Error submitting order: " + err);
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Mobile-Compatible Order Tracking via JSONP
+        function trackOrder() {
+            let phone = document.getElementById('trackPhone').value.trim();
+            let resultDiv = document.getElementById('trackingResult');
+
+            if (!phone) {
+                alert("Please enter a phone number! / దయచేసి ఫోన్ నంబర్ నమోదు చేయండి!");
+                return;
+            }
+
+            resultDiv.innerHTML = "<p>Searching orders... / వెతుకుతోంది...</p>";
+
+            let callbackName = 'cb_' + Math.round(Math.random() * 1000000);
+            window[callbackName] = function(data) {
+                delete window[callbackName];
+                scriptTag.remove();
+
+                if (data.success && data.orders && data.orders.length > 0) {
+                    let html = "<h3>Your Orders / మీ ఆర్డర్లు:</h3>";
+                    data.orders.forEach(o => {
+                        html += `
+                            <table>
+                                <tr><th>Order ID</th><td>${o["Order ID"]}</td></tr>
+                                <tr><th>Products</th><td><pre>${o["Products"]}</pre></td></tr>
+                                <tr><th>Total Amount</th><td>₹${o["Total"]}</td></tr>
+                                <tr><th>Payment Status</th><td>${o["Payment Status"]}</td></tr>
+                                <tr><th>Payment Proof</th><td><a href="${o["Payment Proof"]}" target="_blank">View Uploaded Screenshot</a></td></tr>
+                                <tr><th>Order Status</th><td>${o["Order Status"]}</td></tr>
+                                <tr><th>Postal Tracking No.</th><td>${o["Postal Tracking Number"]}</td></tr>
+                                <tr><th>Postman Name</th><td>${o["Postman Name"]}</td></tr>
+                                <tr><th>Postman Phone</th><td>${o["Postman Phone"]}</td></tr>
+                            </table><br>
+                        `;
+                    });
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.innerHTML = "<p style='color: red;'>No orders found for this phone number. / ఈ నంబర్‌తో ఆర్డర్లు కనుగొనబడలేదు.</p>";
+                }
+            };
+
+            let scriptTag = document.createElement('script');
+            scriptTag.src = `${API_URL}?phone=${encodeURIComponent(phone)}&callback=${callbackName}`;
+            scriptTag.onerror = function() {
+                resultDiv.innerHTML = "<p style='color: red;'>Connection error. Please check API URL. / కనెక్షన్ లోపం.</p>";
+            };
+            document.body.appendChild(scriptTag);
+        }
+
+        // Initialize products on load
+        loadProducts();
+    </script>
 </body>
 </html>
