@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NPS Traders - Wellness Products & Tracking</title>
+    <title>NPS Traders - Natural Wellness Products & Order Tracking</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7f6; color: #333; }
         header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
         .container { max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h2 { border-bottom: 2px solid #2c3e50; padding-bottom: 5px; color: #2c3e50; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
-        .product-card { background: #fafafa; border: 1px solid #ddd; padding: 15px; border-radius: 6px; text-align: center; }
-        .product-card h4 { margin: 10px 0 5px 0; }
-        button { background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        h2 { border-bottom: 2px solid #2c3e50; padding-bottom: 5px; color: #2c3e50; font-size: 18px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .product-card { background: #fafafa; border: 1px solid #ddd; padding: 12px; border-radius: 6px; text-align: center; }
+        .product-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+        .product-card h4 { font-size: 14px; margin: 5px 0; height: 35px; overflow: hidden; }
+        .product-card p { font-weight: bold; color: #27ae60; margin: 5px 0; }
+        button { background: #27ae60; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 14px; }
         button:hover { background: #219653; }
         input, textarea { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
         .qr-section { text-align: center; margin: 15px 0; background: #fff3cd; padding: 15px; border-radius: 6px; border: 1px solid #ffeeba; }
         .qr-section img { width: 180px; height: 180px; margin-top: 10px; border: 2px solid #ccc; border-radius: 4px; }
         .payment-info-box { background: white; padding: 12px; border-radius: 6px; border: 1px solid #ddd; margin-top: 12px; text-align: left; }
-        .payment-row { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 14px; }
-        .copy-btn { background: #2980b9; padding: 6px 12px; font-size: 12px; border-radius: 4px; cursor: pointer; }
-        .copy-btn:hover { background: #1f618d; }
+        .payment-row { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 14px; flex-wrap: wrap; gap: 5px; }
+        .action-btn { background: #2980b9; padding: 6px 12px; font-size: 12px; border-radius: 4px; cursor: pointer; color: white; border: none; }
+        .action-btn:hover { background: #1f618d; }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 14px; }
         th { background: #2c3e50; color: white; }
@@ -35,65 +37,68 @@
     </header>
 
     <div class="container">
-        <!-- Products Section -->
+        <!-- 1. Products Section -->
         <h2>1. Select Products / ఉత్పత్తులను ఎంచుకోండి</h2>
         <div class="product-grid" id="productGrid">
             <!-- Products loaded via JS -->
         </div>
 
-        <!-- Cart & Checkout Form -->
+        <!-- 2. Cart & Checkout Form -->
         <h2>2. Checkout & Payment / చెల్లింపు వివరాలు</h2>
-        <div id="cartSummary">
-            <p><strong>Selected Items:</strong> <span id="cartItemsText">None</span></p>
-            <p><strong>Total Amount: ₹<span id="cartTotal">0</span></strong></p>
+        <div id="cartSummary" style="background: #eef2f3; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+            <p><strong>Selected Items / ఎంచుకున్న ఉత్పత్తులు:</strong> <span id="cartItemsText">None / ఏవీ లేవు</span></p>
+            <p><strong>Total Amount / మొత్తం మొత్తం: ₹<span id="cartTotal">0</span></strong></p>
         </div>
 
         <form id="orderForm">
-            <label>Customer Name / పేరు:</label>
-            <input type="text" id="customerName" required placeholder="Enter your full name">
+            <label><strong>Customer Name / పూర్తి పేరు:</strong></label>
+            <input type="text" id="customerName" required placeholder="Enter your full name / మీ పూర్తి పేరు రాయండి">
 
-            <label>Phone Number / ఫోన్ నంబర్:</label>
-            <input type="tel" id="phone" required placeholder="10-digit mobile number">
+            <label><strong>Phone Number / ఫోన్ నంబర్:</strong></label>
+            <input type="tel" id="phone" required placeholder="10-digit mobile number / 10 అంకెల ఫోన్ నంబర్">
 
-            <label>Delivery Address / చిరునామా:</label>
-            <textarea id="address" required placeholder="House No, Street, City, State"></textarea>
+            <label><strong>Full Address / పూర్తి చిరునామా:</strong></label>
+            <textarea id="address" required placeholder="House No, Street, Village/City, District, State / ఇల్లు నంబర్, వీధి, ఊరు/జిల్లా, రాష్ట్రం"></textarea>
 
-            <label>PIN Code / పిన్ కోడ్:</label>
-            <input type="text" id="pin" required placeholder="6-digit PIN code">
+            <label><strong>PIN Code / పిన్ కోడ్:</strong></label>
+            <input type="text" id="pin" required placeholder="6-digit PIN code / 6 అంకెల పిన్ కోడ్">
 
-            <!-- UPI Payment Section (QR Code, Phone, and UPI ID with Copy Buttons) -->
+            <!-- UPI Payment Section -->
             <div class="qr-section">
-                <p><strong>Scan QR Code to Pay via UPI / UPI ద్వారా చెల్లించడానికి స్క్రీన్ చేయండి</strong></p>
-                <img src="payment-qr.png" alt="Payment QR Code">
+                <p><strong>Scan QR Code to Pay via UPI / UPI ద్వారా చెల్లించడానికి QR కోడ్ స్క్రీన్ చేయండి</strong></p>
+                <img src="payment-qr.png" alt="Payment QR Code" id="qrImage">
+                <div>
+                    <button type="button" class="action-btn" style="margin-top: 10px; background: #8e44ad;" onclick="downloadQR()">Download QR Code / QR కోడ్ డౌన్‌లోడ్ చేయండి</button>
+                </div>
                 
                 <div class="payment-info-box">
                     <div class="payment-row">
-                        <span><strong>Phone:</strong> 9381680127</span>
-                        <button type="button" class="copy-btn" onclick="copyToClipboard('9381680127', 'Phone number copied!')">Copy Phone</button>
+                        <span><strong>Phone / ఫోన్:</strong> 9381680127</span>
+                        <button type="button" class="action-btn" onclick="copyToClipboard('9381680127', 'Phone number copied! / ఫోన్ నంబర్ కాపీ చేయబడింది!')">Copy Phone / కాపీ చేయి</button>
                     </div>
                     <hr style="border: 0; border-top: 1px solid #eee; margin: 6px 0;">
                     <div class="payment-row">
-                        <span><strong>UPI ID:</strong> 9381680127@axl</span>
-                        <button type="button" class="copy-btn" onclick="copyToClipboard('9381680127@axl', 'UPI ID copied!')">Copy UPI ID</button>
+                        <span><strong>UPI ID:</strong> 9381680127-4@axl</span>
+                        <button type="button" class="action-btn" onclick="copyToClipboard('9381680127-4@axl', 'UPI ID copied! / UPI ID కాపీ చేయబడింది!')">Copy UPI ID / కాపీ చేయి</button>
                     </div>
                 </div>
 
-                <p style="font-size: 13px; color: #555; margin-top: 10px;">After payment, upload your screenshot below / చెల్లింపు తర్వాత స్క్రీన్‌షాట్‌ను అప్‌లోడ్ చేయండి</p>
+                <p style="font-size: 13px; color: #555; margin-top: 10px;">After payment, upload your payment screenshot below / చెల్లింపు తర్వాత స్క్రీన్‌షాట్‌ను కింద అప్‌లోడ్ చేయండి</p>
             </div>
 
-            <label>Upload Payment Screenshot / చెల్లింపు స్క్రీన్‌షాట్ అప్‌లోడ్ చేయండి:</label>
+            <label><strong>Upload Payment Screenshot / చెల్లింపు స్క్రీన్‌షాట్ అప్‌లోడ్ చేయండి:</strong></label>
             <input type="file" id="paymentFile" accept="image/*" required>
 
             <button type="submit" style="width: 100%; margin-top: 15px; font-size: 16px;">Place Order / ఆర్డర్ చేయండి</button>
         </form>
     </div>
 
-    <!-- Order Tracking Section -->
+    <!-- 3. Order Tracking Section -->
     <div class="container">
         <h2>3. Track Your Order / మీ ఆర్డర్‌ని ట్రాక్ చేయండి</h2>
-        <label>Enter Phone Number / మీ ఫోన్ నంబర్ నమోదు చేయండి:</label>
-        <input type="tel" id="trackPhone" placeholder="Enter your registered phone number">
-        <button onclick="trackOrder()" style="width: 100%;">Track Order / ట్రాక్ చేయండి</button>
+        <label><strong>Enter Phone Number / మీ ఫోన్ నంబర్ నమోదు చేయండి:</strong></label>
+        <input type="tel" id="trackPhone" placeholder="Enter your registered phone number / మీ రిజిస్టర్డ్ ఫోన్ నంబర్">
+        <button onclick="trackOrder()" style="width: 100%; margin-top: 5px;">Track Order / ట్రాక్ చేయండి</button>
 
         <div class="tracking-result" id="trackingResult"></div>
     </div>
@@ -102,27 +107,39 @@
         // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW BETWEEN THE QUOTES !!!
         const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 
-        // 8 Wellness Products List (English & Telugu)
+        // 8 Products List with Exact Filenames and Fixed Price ₹450
         const products = [
-            { id: 1, name: "Organic Honey / ఆర్గానిక్ తేనె", price: 350 },
-            { id: 2, name: "A2 Cow Ghee / ఆవు నెయ్యి", price: 650 },
-            { id: 3, name: "Cold Pressed Coconut Oil / కొబ్బరి నూనె", price: 300 },
-            { id: 4, name: "Moringa Powder / ములగాకు పొడి", price: 200 },
-            { id: 5, name: "Natural Turmeric Powder / పసుపు పొడి", price: 180 },
-            { id: 6, name: "Millets Health Mix / చిరుధాన్యాల మిశ్రమం", price: 250 },
-            { id: 7, name: "Amla Juice / ఉసిరి రసం", price: 220 },
-            { id: 8, name: "Herbal Hair Oil / మూలికా తైలం", price: 280 }
+            { id: 1, name: "Agarbatti / అగర్బత్తి", price: 450, image: "agarbatti.jpg" },
+            { id: 2, name: "Body Pains Relief / ఒంటి నొప్పులు", price: 450, image: "body-pains.jpg" },
+            { id: 3, name: "BP Care / బి.పి. కేర్", price: 450, image: "bp.png" },
+            { id: 4, name: "Dental Care / దంత సంరక్షణ", price: 450, image: "dental.jpg" },
+            { id: 5, name: "Kidney Care / కిడ్నీ కేర్", price: 450, image: "kidney.jpg" },
+            { id: 6, name: "Knee Pain Relief / మోకాళ్ల నొప్పులు", price: 450, image: "knee-pain.jpg" },
+            { id: 7, name: "Sexual Wellness / సెక్సువల్ వెల్‌నెస్", price: 450, image: "sexual-wellness.png" },
+            { id: 8, name: "Sugar / Diabetes Care / షుగర్ కేర్", price: 450, image: "sugar.jpg" }
         ];
 
-        let cart = {};
+        let cart = {}; // Cart starts from 0
 
         // Helper function to copy text to clipboard with alert
         function copyToClipboard(text, message) {
             navigator.clipboard.writeText(text).then(function() {
                 alert(message);
             }, function(err) {
-                alert("Failed to copy: " + err);
+                alert("Failed to copy / కాపీ చేయడం విఫలమైంది: " + err);
             });
+        }
+
+        // Helper function to download QR code image
+        function downloadQR() {
+            let imageUrl = document.getElementById('qrImage').src;
+            let a = document.createElement('a');
+            a.href = imageUrl;
+            a.download = 'payment-qr.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            alert("QR Code downloaded successfully! / QR కోడ్ విజయవంతంగా డౌన్‌లోడ్ చేయబడింది!");
         }
 
         // Render Products on Page
@@ -130,6 +147,7 @@
             const grid = document.getElementById('productGrid');
             grid.innerHTML = products.map(p => `
                 <div class="product-card">
+                    <img src="${p.image}" alt="${p.name}" onerror="this.src='logo.png'">
                     <h4>${p.name}</h4>
                     <p>₹${p.price}</p>
                     <button type="button" onclick="addToCart(${p.id})">Add / జోడించు</button>
@@ -151,7 +169,7 @@
                 total += prod.price * qty;
                 itemsDesc.push(`${prod.name} (x${qty})`);
             }
-            document.getElementById('cartItemsText').innerText = itemsDesc.length > 0 ? itemsDesc.join(', ') : 'None';
+            document.getElementById('cartItemsText').innerText = itemsDesc.length > 0 ? itemsDesc.join(', ') : 'None / ఏవీ లేవు';
             document.getElementById('cartTotal').innerText = total;
         }
 
@@ -197,7 +215,7 @@
                     mimeType: file.type
                 };
 
-                alert("Submitting order, please wait... / ఆర్డర్ సమర్పించబడుతోంది...");
+                alert("Submitting order, please wait... / ఆర్డర్ సమర్పించబడుతోంది, దయచేసి వేచి ఉండండి...");
 
                 fetch(API_URL, {
                     method: 'POST',
@@ -212,7 +230,7 @@
                     updateCartSummary();
                 })
                 .catch(err => {
-                    alert("Error submitting order: " + err);
+                    alert("Error submitting order / ఆర్డర్ సమర్పించడంలో లోపం: " + err);
                 });
             };
             reader.readAsDataURL(file);
@@ -228,7 +246,7 @@
                 return;
             }
 
-            resultDiv.innerHTML = "<p>Searching orders... / వెతుకుతోంది...</p>";
+            resultDiv.innerHTML = "<p>Searching orders... / ఆర్డర్‌ల కోసం వెతుకుతోంది...</p>";
 
             let callbackName = 'cb_' + Math.round(Math.random() * 1000000);
             window[callbackName] = function(data) {
@@ -240,21 +258,21 @@
                     data.orders.forEach(o => {
                         html += `
                             <table>
-                                <tr><th>Order ID</th><td>${o["Order ID"]}</td></tr>
-                                <tr><th>Products</th><td><pre>${o["Products"]}</pre></td></tr>
-                                <tr><th>Total Amount</th><td>₹${o["Total"]}</td></tr>
-                                <tr><th>Payment Status</th><td>${o["Payment Status"]}</td></tr>
-                                <tr><th>Payment Proof</th><td><a href="${o["Payment Proof"]}" target="_blank">View Uploaded Screenshot</a></td></tr>
-                                <tr><th>Order Status</th><td>${o["Order Status"]}</td></tr>
-                                <tr><th>Postal Tracking No.</th><td>${o["Postal Tracking Number"]}</td></tr>
-                                <tr><th>Postman Name</th><td>${o["Postman Name"]}</td></tr>
-                                <tr><th>Postman Phone</th><td>${o["Postman Phone"]}</td></tr>
+                                <tr><th>Order ID / ఆర్డర్ ఐడి</th><td>${o["Order ID"]}</td></tr>
+                                <tr><th>Products / ఉత్పత్తులు</th><td><pre>${o["Products"]}</pre></td></tr>
+                                <tr><th>Total Amount / మొత్తం</th><td>₹${o["Total"]}</td></tr>
+                                <tr><th>Payment Status / చెల్లింపు స్థితి</th><td>${o["Payment Status"]}</td></tr>
+                                <tr><th>Payment Proof / చెల్లింపు రుజువు</th><td><a href="${o["Payment Proof"]}" target="_blank">View Uploaded Screenshot / స్క్రీన్‌షాట్ చూడండి</a></td></tr>
+                                <tr><th>Order Status / ఆర్డర్ స్థితి</th><td>${o["Order Status"]}</td></tr>
+                                <tr><th>Postal Tracking No. / పోస్టల్ ట్రాకింగ్ నంబర్</th><td>${o["Postal Tracking Number"]}</td></tr>
+                                <tr><th>Postman Name / పోస్ట్‌మాన్ పేరు</th><td>${o["Postman Name"]}</td></tr>
+                                <tr><th>Postman Phone / పోస్ట్‌మాన్ ఫోన్ నంబర్</th><td>${o["Postman Phone"]}</td></tr>
                             </table><br>
                         `;
                     });
                     resultDiv.innerHTML = html;
                 } else {
-                    resultDiv.innerHTML = "<p style='color: red;'>No orders found for this phone number. / ఈ నంబర్‌తో ఆర్డర్లు కనుగొనబడలేదు.</p>";
+                    resultDiv.innerHTML = "<p style='color: red;'>No orders found for this phone number. / ఈ ఫోన్ నంబర్‌తో ఆర్డర్లు కనుగొనబడలేదు.</p>";
                 }
             };
 
