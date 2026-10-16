@@ -6,23 +6,43 @@
     <title>NPS Traders - Natural Wellness Products & Order Tracking</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7f6; color: #333; }
-        header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+        
+        /* Header with Logo */
+        header { background: #2c3e50; color: white; padding: 15px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px; }
+        header img.logo { height: 60px; width: auto; border-radius: 5px; }
+        header div h1 { margin: 0; font-size: 24px; }
+        header div p { margin: 5px 0 0 0; font-size: 13px; color: #ecf0f1; }
+
+        /* Hero Banner */
+        .hero-banner { width: 100%; max-height: 250px; object-fit: cover; display: block; }
+
         .container { max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         h2 { border-bottom: 2px solid #2c3e50; padding-bottom: 5px; color: #2c3e50; font-size: 18px; }
+        
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-bottom: 20px; }
         .product-card { background: #fafafa; border: 1px solid #ddd; padding: 12px; border-radius: 6px; text-align: center; }
         .product-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
         .product-card h4 { font-size: 14px; margin: 5px 0; height: 35px; overflow: hidden; }
         .product-card p { font-weight: bold; color: #27ae60; margin: 5px 0; }
-        button { background: #27ae60; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 14px; }
-        button:hover { background: #219653; }
+
+        /* Plus Minus Quantity Buttons */
+        .qty-controls { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; }
+        .qty-btn { background: #2980b9; color: white; border: none; width: 30px; height: 30px; font-size: 18px; font-weight: bold; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .qty-btn:hover { background: #1f618d; }
+        .qty-count { font-size: 16px; font-weight: bold; width: 20px; text-align: center; }
+
+        button.submit-btn { background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; }
+        button.submit-btn:hover { background: #219653; }
+        
         input, textarea { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
         .qr-section { text-align: center; margin: 15px 0; background: #fff3cd; padding: 15px; border-radius: 6px; border: 1px solid #ffeeba; }
         .qr-section img { width: 180px; height: 180px; margin-top: 10px; border: 2px solid #ccc; border-radius: 4px; }
+        
         .payment-info-box { background: white; padding: 12px; border-radius: 6px; border: 1px solid #ddd; margin-top: 12px; text-align: left; }
         .payment-row { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 14px; flex-wrap: wrap; gap: 5px; }
         .action-btn { background: #2980b9; padding: 6px 12px; font-size: 12px; border-radius: 4px; cursor: pointer; color: white; border: none; }
         .action-btn:hover { background: #1f618d; }
+        
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 14px; }
         th { background: #2c3e50; color: white; }
@@ -31,10 +51,17 @@
 </head>
 <body>
 
+    <!-- Header with Logo -->
     <header>
-        <h1>NPS Traders</h1>
-        <p>Natural Wellness Products & Organic Goods | సహజ ఆరోగ్య ఉత్పత్తులు</p>
+        <img src="logo.png" alt="NPS Traders Logo" class="logo" onerror="this.style.display='none'">
+        <div>
+            <h1>NPS Traders</h1>
+            <p>Natural Wellness Products & Organic Goods | సహజ ఆరోగ్య ఉత్పత్తులు</p>
+        </div>
     </header>
+
+    <!-- Hero Banner -->
+    <img src="hero.jpg" alt="NPS Traders Hero Banner" class="hero-banner" onerror="this.style.display='none'">
 
     <div class="container">
         <!-- 1. Products Section -->
@@ -45,9 +72,9 @@
 
         <!-- 2. Cart & Checkout Form -->
         <h2>2. Checkout & Payment / చెల్లింపు వివరాలు</h2>
-        <div id="cartSummary" style="background: #eef2f3; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
-            <p><strong>Selected Items / ఎంచుకున్న ఉత్పత్తులు:</strong> <span id="cartItemsText">None / ఏవీ లేవు</span></p>
-            <p><strong>Total Amount / మొత్తం మొత్తం: ₹<span id="cartTotal">0</span></strong></p>
+        <div id="cartSummary" style="background: #eef2f3; padding: 12px; border-radius: 5px; margin-bottom: 15px;">
+            <p style="margin: 0 0 8px 0;"><strong>Selected Items / ఎంచుకున్న ఉత్పత్తులు:</strong> <span id="cartItemsText">None / ఏవీ లేవు</span></p>
+            <p style="margin: 0; font-size: 16px;"><strong>Total Amount / మొత్తం మొత్తం: ₹<span id="cartTotal">0</span></strong></p>
         </div>
 
         <form id="orderForm">
@@ -89,7 +116,7 @@
             <label><strong>Upload Payment Screenshot / చెల్లింపు స్క్రీన్‌షాట్ అప్‌లోడ్ చేయండి:</strong></label>
             <input type="file" id="paymentFile" accept="image/*" required>
 
-            <button type="submit" style="width: 100%; margin-top: 15px; font-size: 16px;">Place Order / ఆర్డర్ చేయండి</button>
+            <button type="submit" class="submit-btn" style="margin-top: 15px;">Place Order / ఆర్డర్ చేయండి</button>
         </form>
     </div>
 
@@ -98,7 +125,7 @@
         <h2>3. Track Your Order / మీ ఆర్డర్‌ని ట్రాక్ చేయండి</h2>
         <label><strong>Enter Phone Number / మీ ఫోన్ నంబర్ నమోదు చేయండి:</strong></label>
         <input type="tel" id="trackPhone" placeholder="Enter your registered phone number / మీ రిజిస్టర్డ్ ఫోన్ నంబర్">
-        <button onclick="trackOrder()" style="width: 100%; margin-top: 5px;">Track Order / ట్రాక్ చేయండి</button>
+        <button onclick="trackOrder()" class="action-btn" style="width: 100%; padding: 10px; font-size: 15px; margin-top: 5px;">Track Order / ట్రాక్ చేయండి</button>
 
         <div class="tracking-result" id="trackingResult"></div>
     </div>
@@ -119,7 +146,8 @@
             { id: 8, name: "Sugar / Diabetes Care / షుగర్ కేర్", price: 450, image: "sugar.jpg" }
         ];
 
-        let cart = {}; // Cart starts from 0
+        // Cart quantities start at 0
+        let cart = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 };
 
         // Helper function to copy text to clipboard with alert
         function copyToClipboard(text, message) {
@@ -142,7 +170,7 @@
             alert("QR Code downloaded successfully! / QR కోడ్ విజయవంతంగా డౌన్‌లోడ్ చేయబడింది!");
         }
 
-        // Render Products on Page
+        // Render Products with Plus & Minus Controls
         function loadProducts() {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = products.map(p => `
@@ -150,142 +178,17 @@
                     <img src="${p.image}" alt="${p.name}" onerror="this.src='logo.png'">
                     <h4>${p.name}</h4>
                     <p>₹${p.price}</p>
-                    <button type="button" onclick="addToCart(${p.id})">Add / జోడించు</button>
+                    <div class="qty-controls">
+                        <button type="button" class="qty-btn" onclick="updateQty(${p.id}, -1)">-</button>
+                        <span class="qty-count" id="qty-${p.id}">${cart[p.id] || 0}</span>
+                        <button type="button" class="qty-btn" onclick="updateQty(${p.id}, 1)">+</button>
+                    </div>
                 </div>
             `).join('');
         }
 
-        function addToCart(id) {
-            cart[id] = (cart[id] || 0) + 1;
-            updateCartSummary();
-        }
-
-        function updateCartSummary() {
-            let total = 0;
-            let itemsDesc = [];
-            for (let id in cart) {
-                let prod = products.find(p => p.id == id);
-                let qty = cart[id];
-                total += prod.price * qty;
-                itemsDesc.push(`${prod.name} (x${qty})`);
-            }
-            document.getElementById('cartItemsText').innerText = itemsDesc.length > 0 ? itemsDesc.join(', ') : 'None / ఏవీ లేవు';
-            document.getElementById('cartTotal').innerText = total;
-        }
-
-        // Handle Order Submission with Screenshot File Reader
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            if (Object.keys(cart).length === 0) {
-                alert("Please select at least one product! / దయచేసి ఏదైనా ఒక ఉత్పత్తిని ఎంచుకోండి!");
-                return;
-            }
-
-            let fileInput = document.getElementById('paymentFile');
-            let file = fileInput.files[0];
-
-            if (!file) {
-                alert("Please upload the payment screenshot! / దయచేసి చెల్లింపు స్క్రీన్‌షాట్‌ను అప్‌లోడ్ చేయండి!");
-                return;
-            }
-
-            let reader = new FileReader();
-            reader.onload = function(event) {
-                let base64String = event.target.result;
-
-                let itemsArray = [];
-                let grandTotal = 0;
-                for (let id in cart) {
-                    let prod = products.find(p => p.id == id);
-                    let qty = cart[id];
-                    grandTotal += prod.price * qty;
-                    itemsArray.push({ name: prod.name, quantity: qty });
-                }
-
-                let payload = {
-                    customerName: document.getElementById('customerName').value,
-                    phone: document.getElementById('phone').value,
-                    address: document.getElementById('address').value,
-                    pin: document.getElementById('pin').value,
-                    items: itemsArray,
-                    total: grandTotal,
-                    fileData: base64String,
-                    fileName: file.name,
-                    mimeType: file.type
-                };
-
-                alert("Submitting order, please wait... / ఆర్డర్ సమర్పించబడుతోంది, దయచేసి వేచి ఉండండి...");
-
-                fetch(API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                })
-                .then(() => {
-                    alert("Order placed successfully! / ఆర్డర్ విజయవంతంగా చేయబడింది!");
-                    document.getElementById('orderForm').reset();
-                    cart = {};
-                    updateCartSummary();
-                })
-                .catch(err => {
-                    alert("Error submitting order / ఆర్డర్ సమర్పించడంలో లోపం: " + err);
-                });
-            };
-            reader.readAsDataURL(file);
-        });
-
-        // Mobile-Compatible Order Tracking via JSONP
-        function trackOrder() {
-            let phone = document.getElementById('trackPhone').value.trim();
-            let resultDiv = document.getElementById('trackingResult');
-
-            if (!phone) {
-                alert("Please enter a phone number! / దయచేసి ఫోన్ నంబర్ నమోదు చేయండి!");
-                return;
-            }
-
-            resultDiv.innerHTML = "<p>Searching orders... / ఆర్డర్‌ల కోసం వెతుకుతోంది...</p>";
-
-            let callbackName = 'cb_' + Math.round(Math.random() * 1000000);
-            window[callbackName] = function(data) {
-                delete window[callbackName];
-                scriptTag.remove();
-
-                if (data.success && data.orders && data.orders.length > 0) {
-                    let html = "<h3>Your Orders / మీ ఆర్డర్లు:</h3>";
-                    data.orders.forEach(o => {
-                        html += `
-                            <table>
-                                <tr><th>Order ID / ఆర్డర్ ఐడి</th><td>${o["Order ID"]}</td></tr>
-                                <tr><th>Products / ఉత్పత్తులు</th><td><pre>${o["Products"]}</pre></td></tr>
-                                <tr><th>Total Amount / మొత్తం</th><td>₹${o["Total"]}</td></tr>
-                                <tr><th>Payment Status / చెల్లింపు స్థితి</th><td>${o["Payment Status"]}</td></tr>
-                                <tr><th>Payment Proof / చెల్లింపు రుజువు</th><td><a href="${o["Payment Proof"]}" target="_blank">View Uploaded Screenshot / స్క్రీన్‌షాట్ చూడండి</a></td></tr>
-                                <tr><th>Order Status / ఆర్డర్ స్థితి</th><td>${o["Order Status"]}</td></tr>
-                                <tr><th>Postal Tracking No. / పోస్టల్ ట్రాకింగ్ నంబర్</th><td>${o["Postal Tracking Number"]}</td></tr>
-                                <tr><th>Postman Name / పోస్ట్‌మాన్ పేరు</th><td>${o["Postman Name"]}</td></tr>
-                                <tr><th>Postman Phone / పోస్ట్‌మాన్ ఫోన్ నంబర్</th><td>${o["Postman Phone"]}</td></tr>
-                            </table><br>
-                        `;
-                    });
-                    resultDiv.innerHTML = html;
-                } else {
-                    resultDiv.innerHTML = "<p style='color: red;'>No orders found for this phone number. / ఈ ఫోన్ నంబర్‌తో ఆర్డర్లు కనుగొనబడలేదు.</p>";
-                }
-            };
-
-            let scriptTag = document.createElement('script');
-            scriptTag.src = `${API_URL}?phone=${encodeURIComponent(phone)}&callback=${callbackName}`;
-            scriptTag.onerror = function() {
-                resultDiv.innerHTML = "<p style='color: red;'>Connection error. Please check API URL. / కనెక్షన్ లోపం.</p>";
-            };
-            document.body.appendChild(scriptTag);
-        }
-
-        // Initialize products on load
-        loadProducts();
-    </script>
-</body>
-</html>
+        function updateQty(id, change) {
+            let current = cart[id] || 0;
+            let updated = current + change;
+            if (updated < 0) updated = 0; // Don't drop below 0
+            cart
