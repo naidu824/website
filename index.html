@@ -3,78 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NPS Traders - Natural Wellness Products & Order Tracking</title>
+    <title>NPS Traders - Natural Wellness Products</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7f6; color: #333; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f4f7f6; color: #333; }
         
-        /* Header with Logo */
-        header { background: #2c3e50; color: white; padding: 15px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px; }
-        header img.logo { height: 60px; width: auto; border-radius: 5px; }
-        header div h1 { margin: 0; font-size: 24px; }
-        header div p { margin: 5px 0 0 0; font-size: 13px; color: #ecf0f1; }
+        /* Clean Top Header */
+        header { background: #2c3e50; color: white; padding: 12px 20px; display: flex; align-items: center; justify-content: center; gap: 15px; }
+        header img.logo { height: 45px; width: auto; border-radius: 4px; }
+        header .title-box h1 { margin: 0; font-size: 20px; }
+        header .title-box p { margin: 3px 0 0 0; font-size: 12px; color: #bdc3c7; }
 
-        /* Hero Banner */
-        .hero-banner { width: 100%; max-height: 250px; object-fit: cover; display: block; }
+        /* Proportionate Hero Banner */
+        .hero-container { max-width: 800px; margin: 15px auto 0 auto; padding: 0 15px; }
+        .hero-banner { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; display: block; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-        .container { max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h2 { border-bottom: 2px solid #2c3e50; padding-bottom: 5px; color: #2c3e50; font-size: 18px; }
+        .container { max-width: 800px; margin: 15px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid #2c3e50; padding-bottom: 6px; color: #2c3e50; font-size: 16px; margin-top: 5px; }
         
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-bottom: 20px; }
-        .product-card { background: #fafafa; border: 1px solid #ddd; padding: 12px; border-radius: 6px; text-align: center; }
-        .product-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
-        .product-card h4 { font-size: 14px; margin: 5px 0; height: 35px; overflow: hidden; }
-        .product-card p { font-weight: bold; color: #27ae60; margin: 5px 0; }
+        /* Product Grid Layout */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin: 15px 0 25px 0; }
+        .product-card { background: #fff; border: 1px solid #e0e0e0; padding: 12px; border-radius: 6px; text-align: center; transition: 0.2s; }
+        .product-card:hover { border-color: #27ae60; }
+        .product-card img { width: 100%; height: 110px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+        .product-card h4 { font-size: 13px; margin: 5px 0; height: 36px; overflow: hidden; display: flex; align-items: center; justify-content: center; line-height: 1.2; }
+        .product-card p { font-weight: bold; color: #27ae60; margin: 5px 0; font-size: 15px; }
 
-        /* Plus Minus Quantity Buttons */
-        .qty-controls { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; }
-        .qty-btn { background: #2980b9; color: white; border: none; width: 30px; height: 30px; font-size: 18px; font-weight: bold; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        /* Plus / Minus Buttons */
+        .qty-controls { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 8px; }
+        .qty-btn { background: #2980b9; color: white; border: none; width: 32px; height: 32px; font-size: 18px; font-weight: bold; border-radius: 4px; cursor: pointer; }
         .qty-btn:hover { background: #1f618d; }
-        .qty-count { font-size: 16px; font-weight: bold; width: 20px; text-align: center; }
+        .qty-count { font-size: 15px; font-weight: bold; min-width: 20px; text-align: center; }
 
-        button.submit-btn { background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; }
+        button.submit-btn { background: #27ae60; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; }
         button.submit-btn:hover { background: #219653; }
         
-        input, textarea { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        input, textarea { width: 100%; padding: 10px; margin: 8px 0 15px 0; border: 1px solid #ccc; border-radius: 4px; }
         .qr-section { text-align: center; margin: 15px 0; background: #fff3cd; padding: 15px; border-radius: 6px; border: 1px solid #ffeeba; }
-        .qr-section img { width: 180px; height: 180px; margin-top: 10px; border: 2px solid #ccc; border-radius: 4px; }
+        .qr-section img { width: 160px; height: 160px; margin-top: 10px; border: 2px solid #ccc; border-radius: 4px; }
         
         .payment-info-box { background: white; padding: 12px; border-radius: 6px; border: 1px solid #ddd; margin-top: 12px; text-align: left; }
-        .payment-row { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 14px; flex-wrap: wrap; gap: 5px; }
+        .payment-row { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; font-size: 14px; }
         .action-btn { background: #2980b9; padding: 6px 12px; font-size: 12px; border-radius: 4px; cursor: pointer; color: white; border: none; }
         .action-btn:hover { background: #1f618d; }
         
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 13px; }
         th { background: #2c3e50; color: white; }
         .tracking-result { margin-top: 15px; }
     </style>
 </head>
 <body>
 
-    <!-- Header with Logo -->
+    <!-- Header Section -->
     <header>
-        <img src="logo.png" alt="NPS Traders Logo" class="logo" onerror="this.style.display='none'">
-        <div>
+        <img src="logo.png" alt="NPS Logo" class="logo" onerror="this.style.display='none'">
+        <div class="title-box">
             <h1>NPS Traders</h1>
             <p>Natural Wellness Products & Organic Goods | సహజ ఆరోగ్య ఉత్పత్తులు</p>
         </div>
     </header>
 
-    <!-- Hero Banner -->
-    <img src="hero.jpg" alt="NPS Traders Hero Banner" class="hero-banner" onerror="this.style.display='none'">
+    <!-- Compact Hero Banner -->
+    <div class="hero-container">
+        <img src="hero.jpg" alt="NPS Traders Banner" class="hero-banner" onerror="this.style.display='none'">
+    </div>
 
     <div class="container">
-        <!-- 1. Products Section -->
+        <!-- Products Section -->
         <h2>1. Select Products / ఉత్పత్తులను ఎంచుకోండి</h2>
         <div class="product-grid" id="productGrid">
-            <!-- Products loaded via JS -->
+            <!-- Loaded via Javascript -->
         </div>
 
-        <!-- 2. Cart & Checkout Form -->
+        <!-- Checkout Form -->
         <h2>2. Checkout & Payment / చెల్లింపు వివరాలు</h2>
         <div id="cartSummary" style="background: #eef2f3; padding: 12px; border-radius: 5px; margin-bottom: 15px;">
-            <p style="margin: 0 0 8px 0;"><strong>Selected Items / ఎంచుకున్న ఉత్పత్తులు:</strong> <span id="cartItemsText">None / ఏవీ లేవు</span></p>
-            <p style="margin: 0; font-size: 16px;"><strong>Total Amount / మొత్తం మొత్తం: ₹<span id="cartTotal">0</span></strong></p>
+            <p style="margin: 0 0 6px 0; font-size: 14px;"><strong>Selected Items / ఎంచుకున్న ఉత్పత్తులు:</strong> <span id="cartItemsText">None / ఏవీ లేవు</span></p>
+            <p style="margin: 0; font-size: 16px; color: #2c3e50;"><strong>Total Amount / మొత్తం మొత్తం: ₹<span id="cartTotal">0</span></strong></p>
         </div>
 
         <form id="orderForm">
@@ -85,14 +91,14 @@
             <input type="tel" id="phone" required placeholder="10-digit mobile number / 10 అంకెల ఫోన్ నంబర్">
 
             <label><strong>Full Address / పూర్తి చిరునామా:</strong></label>
-            <textarea id="address" required placeholder="House No, Street, Village/City, District, State / ఇల్లు నంబర్, వీధి, ఊరు/జిల్లా, రాష్ట్రం"></textarea>
+            <textarea id="address" required placeholder="House No, Street, Village/City, District, State"></textarea>
 
             <label><strong>PIN Code / పిన్ కోడ్:</strong></label>
             <input type="text" id="pin" required placeholder="6-digit PIN code / 6 అంకెల పిన్ కోడ్">
 
-            <!-- UPI Payment Section -->
+            <!-- Payment Block -->
             <div class="qr-section">
-                <p><strong>Scan QR Code to Pay via UPI / UPI ద్వారా చెల్లించడానికి QR కోడ్ స్క్రీన్ చేయండి</strong></p>
+                <p style="margin:0; font-weight:bold;">Scan QR Code to Pay via UPI / UPI ద్వారా చెల్లించడానికి QR కోడ్ స్క్రీన్ చేయండి</p>
                 <img src="payment-qr.png" alt="Payment QR Code" id="qrImage">
                 <div>
                     <button type="button" class="action-btn" style="margin-top: 10px; background: #8e44ad;" onclick="downloadQR()">Download QR Code / QR కోడ్ డౌన్‌లోడ్ చేయండి</button>
@@ -101,64 +107,56 @@
                 <div class="payment-info-box">
                     <div class="payment-row">
                         <span><strong>Phone / ఫోన్:</strong> 9381680127</span>
-                        <button type="button" class="action-btn" onclick="copyToClipboard('9381680127', 'Phone number copied! / ఫోన్ నంబర్ కాపీ చేయబడింది!')">Copy Phone / కాపీ చేయి</button>
+                        <button type="button" class="action-btn" onclick="copyToClipboard('9381680127', 'Phone number copied!')">Copy Phone</button>
                     </div>
-                    <hr style="border: 0; border-top: 1px solid #eee; margin: 6px 0;">
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 4px 0;">
                     <div class="payment-row">
                         <span><strong>UPI ID:</strong> 9381680127-4@axl</span>
-                        <button type="button" class="action-btn" onclick="copyToClipboard('9381680127-4@axl', 'UPI ID copied! / UPI ID కాపీ చేయబడింది!')">Copy UPI ID / కాపీ చేయి</button>
+                        <button type="button" class="action-btn" onclick="copyToClipboard('9381680127-4@axl', 'UPI ID copied!')">Copy UPI ID</button>
                     </div>
                 </div>
 
-                <p style="font-size: 13px; color: #555; margin-top: 10px;">After payment, upload your payment screenshot below / చెల్లింపు తర్వాత స్క్రీన్‌షాట్‌ను కింద అప్‌లోడ్ చేయండి</p>
+                <p style="font-size: 12px; color: #555; margin: 8px 0 0 0;">After payment, upload your payment screenshot below</p>
             </div>
 
             <label><strong>Upload Payment Screenshot / చెల్లింపు స్క్రీన్‌షాట్ అప్‌లోడ్ చేయండి:</strong></label>
             <input type="file" id="paymentFile" accept="image/*" required>
 
-            <button type="submit" class="submit-btn" style="margin-top: 15px;">Place Order / ఆర్డర్ చేయండి</button>
+            <button type="submit" class="submit-btn" style="margin-top: 10px;">Place Order / ఆర్డర్ చేయండి</button>
         </form>
     </div>
 
-    <!-- 3. Order Tracking Section -->
+    <!-- Order Tracking -->
     <div class="container">
         <h2>3. Track Your Order / మీ ఆర్డర్‌ని ట్రాక్ చేయండి</h2>
-        <label><strong>Enter Phone Number / మీ ఫోన్ నంబర్ నమోదు చేయండి:</strong></label>
-        <input type="tel" id="trackPhone" placeholder="Enter your registered phone number / మీ రిజిస్టర్డ్ ఫోన్ నంబర్">
-        <button onclick="trackOrder()" class="action-btn" style="width: 100%; padding: 10px; font-size: 15px; margin-top: 5px;">Track Order / ట్రాక్ చేయండి</button>
+        <label><strong>Enter Registered Phone Number / ఫోన్ నంబర్ నమోదు చేయండి:</strong></label>
+        <input type="tel" id="trackPhone" placeholder="Enter phone number to track">
+        <button onclick="trackOrder()" class="action-btn" style="width: 100%; padding: 10px; font-size: 14px; margin-top: 5px;">Track Order / ట్రాక్ చేయండి</button>
 
         <div class="tracking-result" id="trackingResult"></div>
     </div>
 
     <script>
-        // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW BETWEEN THE QUOTES !!!
-        const API_URL = "https://script.google.com/macros/s/AKfycbyEH2YWPvMOWV6wP3bNDhTCWPgb982FdJ3TK0sY_wRxU_LwGwCkSFp8vUSt-g-IDSx3Zw/exec";
+        // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW
+        const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 
-        // 8 Products List with Exact Filenames and Fixed Price ₹450
         const products = [
             { id: 1, name: "Agarbatti / అగర్బత్తి", price: 450, image: "agarbatti.jpg" },
-            { id: 2, name: "Body Pains Relief / ఒంటి నొప్పులు", price: 450, image: "body-pains.jpg" },
+            { id: 2, name: "Body Pains / ఒంటి నొప్పులు", price: 450, image: "body-pains.jpg" },
             { id: 3, name: "BP Care / బి.పి. కేర్", price: 450, image: "bp.png" },
             { id: 4, name: "Dental Care / దంత సంరక్షణ", price: 450, image: "dental.jpg" },
             { id: 5, name: "Kidney Care / కిడ్నీ కేర్", price: 450, image: "kidney.jpg" },
-            { id: 6, name: "Knee Pain Relief / మోకాళ్ల నొప్పులు", price: 450, image: "knee-pain.jpg" },
-            { id: 7, name: "Sexual Wellness / సెక్సువల్ వెల్‌నెస్", price: 450, image: "sexual-wellness.png" },
-            { id: 8, name: "Sugar / Diabetes Care / షుగర్ కేర్", price: 450, image: "sugar.jpg" }
+            { id: 6, name: "Knee Pain / మోకాళ్ల నొప్పులు", price: 450, image: "knee-pain.jpg" },
+            { id: 7, name: "Sexual Wellness / వెల్‌నెస్", price: 450, image: "sexual-wellness.png" },
+            { id: 8, name: "Sugar Care / షుగర్ కేర్", price: 450, image: "sugar.jpg" }
         ];
 
-        // Cart quantities start at 0
         let cart = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 };
 
-        // Helper function to copy text to clipboard with alert
         function copyToClipboard(text, message) {
-            navigator.clipboard.writeText(text).then(function() {
-                alert(message);
-            }, function(err) {
-                alert("Failed to copy / కాపీ చేయడం విఫలమైంది: " + err);
-            });
+            navigator.clipboard.writeText(text).then(() => alert(message), err => alert("Failed to copy: " + err));
         }
 
-        // Helper function to download QR code image
         function downloadQR() {
             let imageUrl = document.getElementById('qrImage').src;
             let a = document.createElement('a');
@@ -167,28 +165,163 @@
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            alert("QR Code downloaded successfully! / QR కోడ్ విజయవంతంగా డౌన్‌లోడ్ చేయబడింది!");
         }
 
-        // Render Products with Plus & Minus Controls
         function loadProducts() {
             const grid = document.getElementById('productGrid');
-            grid.innerHTML = products.map(p => `
-                <div class="product-card">
-                    <img src="${p.image}" alt="${p.name}" onerror="this.src='logo.png'">
-                    <h4>${p.name}</h4>
-                    <p>₹${p.price}</p>
-                    <div class="qty-controls">
-                        <button type="button" class="qty-btn" onclick="updateQty(${p.id}, -1)">-</button>
-                        <span class="qty-count" id="qty-${p.id}">${cart[p.id] || 0}</span>
-                        <button type="button" class="qty-btn" onclick="updateQty(${p.id}, 1)">+</button>
+            let html = "";
+            products.forEach(p => {
+                html += `
+                    <div class="product-card">
+                        <img src="${p.image}" alt="${p.name}" onerror="this.src='logo.png'">
+                        <h4>${p.name}</h4>
+                        <p>₹${p.price}</p>
+                        <div class="qty-controls">
+                            <button type="button" class="qty-btn" onclick="updateQty(${p.id}, -1)">-</button>
+                            <span class="qty-count" id="qty-${p.id}">0</span>
+                            <button type="button" class="qty-btn" onclick="updateQty(${p.id}, 1)">+</button>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            });
+            grid.innerHTML = html;
         }
 
         function updateQty(id, change) {
             let current = cart[id] || 0;
             let updated = current + change;
-            if (updated < 0) updated = 0; // Don't drop below 0
-            cart
+            if (updated < 0) updated = 0;
+            cart[id] = updated;
+            document.getElementById('qty-' + id).innerText = updated;
+            updateCartSummary();
+        }
+
+        function updateCartSummary() {
+            let total = 0;
+            let itemsDesc = [];
+            for (let id in cart) {
+                let qty = cart[id];
+                if (qty > 0) {
+                    let prod = products.find(p => p.id == id);
+                    total += prod.price * qty;
+                    itemsDesc.push(prod.name + ' (x' + qty + ')');
+                }
+            }
+            document.getElementById('cartItemsText').innerText = itemsDesc.length > 0 ? itemsDesc.join(', ') : 'None / ఏవీ లేవు';
+            document.getElementById('cartTotal').innerText = total;
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let itemsArray = [];
+            let grandTotal = 0;
+            for (let id in cart) {
+                let qty = cart[id];
+                if (qty > 0) {
+                    let prod = products.find(p => p.id == id);
+                    grandTotal += prod.price * qty;
+                    itemsArray.push({ name: prod.name, quantity: qty });
+                }
+            }
+
+            if (itemsArray.length === 0 || grandTotal === 0) {
+                alert("Please select at least one product using (+) button! / దయచేసి (+) బటన్ ఉపయోగించి ఉత్పత్తిని ఎంచుకోండి!");
+                return;
+            }
+
+            let fileInput = document.getElementById('paymentFile');
+            let file = fileInput.files[0];
+
+            if (!file) {
+                alert("Please upload the payment screenshot!");
+                return;
+            }
+
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                let base64String = event.target.result;
+
+                let payload = {
+                    customerName: document.getElementById('customerName').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    pin: document.getElementById('pin').value,
+                    items: itemsArray,
+                    total: grandTotal,
+                    fileData: base64String,
+                    fileName: file.name,
+                    mimeType: file.type
+                };
+
+                alert("Submitting order, please wait...");
+
+                fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(() => {
+                    alert("Order placed successfully! / ఆర్డర్ విజయవంతంగా చేయబడింది!");
+                    document.getElementById('orderForm').reset();
+                    for (let id in cart) {
+                        cart[id] = 0;
+                        let qtyEl = document.getElementById('qty-' + id);
+                        if (qtyEl) qtyEl.innerText = 0;
+                    }
+                    updateCartSummary();
+                })
+                .catch(err => alert("Error: " + err));
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function trackOrder() {
+            let phone = document.getElementById('trackPhone').value.trim();
+            let resultDiv = document.getElementById('trackingResult');
+
+            if (!phone) {
+                alert("Please enter a phone number!");
+                return;
+            }
+
+            resultDiv.innerHTML = "<p>Searching orders...</p>";
+
+            let callbackName = 'cb_' + Math.round(Math.random() * 1000000);
+            window[callbackName] = function(data) {
+                delete window[callbackName];
+                scriptTag.remove();
+
+                if (data.success && data.orders && data.orders.length > 0) {
+                    let html = "<h3>Your Orders / మీ ఆర్డర్లు:</h3>";
+                    data.orders.forEach(o => {
+                        html += `
+                            <table>
+                                <tr><th>Order ID</th><td>${o["Order ID"]}</td></tr>
+                                <tr><th>Products</th><td><pre>${o["Products"]}</pre></td></tr>
+                                <tr><th>Total</th><td>₹${o["Total"]}</td></tr>
+                                <tr><th>Payment Status</th><td>${o["Payment Status"]}</td></tr>
+                                <tr><th>Payment Proof</th><td><a href="${o["Payment Proof"]}" target="_blank">View Screenshot</a></td></tr>
+                                <tr><th>Order Status</th><td>${o["Order Status"]}</td></tr>
+                                <tr><th>Tracking No.</th><td>${o["Postal Tracking Number"]}</td></tr>
+                                <tr><th>Postman Name</th><td>${o["Postman Name"]}</td></tr>
+                                <tr><th>Postman Phone</th><td>${o["Postman Phone"]}</td></tr>
+                            </table><br>
+                        `;
+                    });
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.innerHTML = "<p style='color: red;'>No orders found for this phone number.</p>";
+                }
+            };
+
+            let scriptTag = document.createElement('script');
+            scriptTag.src = API_URL + '?phone=' + encodeURIComponent(phone) + '&callback=' + callbackName;
+            document.body.appendChild(scriptTag);
+        }
+
+        window.onload = loadProducts;
+    </script>
+</body>
+</html>
