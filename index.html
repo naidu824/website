@@ -6,26 +6,36 @@
     <title>NPS Traders - Natural Wellness Products</title>
     <style>
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f4f7f6; color: #333; }
         
-        /* Clean Top Header */
-        header { background: #2c3e50; color: white; padding: 12px 20px; display: flex; align-items: center; justify-content: center; gap: 15px; }
-        header img.logo { height: 45px; width: auto; border-radius: 4px; }
-        header .title-box h1 { margin: 0; font-size: 20px; }
-        header .title-box p { margin: 3px 0 0 0; font-size: 12px; color: #bdc3c7; }
+        /* Clean Top Header with Bigger Logo */
+        header { background: #2c3e50; color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: center; gap: 15px; text-align: center; }
+        header img.logo { height: 60px; width: auto; border-radius: 4px; } /* Slightly bigger logo */
+        header .title-box h1 { margin: 0; font-size: 22px; }
+        header .title-box p { margin: 3px 0 0 0; font-size: 13px; color: #bdc3c7; }
 
-        /* Proportionate Hero Banner */
+        /* Top Navigation Tabs (Above Hero) */
+        .top-nav { background: #1a252f; display: flex; justify-content: center; gap: 15px; padding: 10px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .top-nav a { color: #ffffff; text-decoration: none; font-weight: bold; font-size: 14px; padding: 6px 14px; border-radius: 20px; background: #34495e; transition: 0.2s; }
+        .top-nav a:hover { background: #27ae60; }
+
+        /* Hero Banner */
         .hero-container { max-width: 800px; margin: 15px auto 0 auto; padding: 0 15px; }
         .hero-banner { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; display: block; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
         .container { max-width: 800px; margin: 15px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         h2 { border-bottom: 2px solid #2c3e50; padding-bottom: 6px; color: #2c3e50; font-size: 16px; margin-top: 5px; }
         
-        /* Product Grid Layout */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin: 15px 0 25px 0; }
-        .product-card { background: #fff; border: 1px solid #e0e0e0; padding: 12px; border-radius: 6px; text-align: center; transition: 0.2s; }
+        /* Mobile-Responsive Product Grid & Fixed Full Image Display */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 15px 0 25px 0; }
+        .product-card { background: #fff; border: 1px solid #e0e0e0; padding: 10px; border-radius: 6px; text-align: center; transition: 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
         .product-card:hover { border-color: #27ae60; }
-        .product-card img { width: 100%; height: 110px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+        
+        /* Fixed: Fully visible product photos without cropping on phones */
+        .img-box { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; background: #fafafa; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+        .product-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
         .product-card h4 { font-size: 13px; margin: 5px 0; height: 36px; overflow: hidden; display: flex; align-items: center; justify-content: center; line-height: 1.2; }
         .product-card p { font-weight: bold; color: #27ae60; margin: 5px 0; font-size: 15px; }
 
@@ -55,7 +65,7 @@
 </head>
 <body>
 
-    <!-- Header Section -->
+    <!-- Header Section with Larger Logo -->
     <header>
         <img src="logo.png" alt="NPS Logo" class="logo" onerror="this.style.display='none'">
         <div class="title-box">
@@ -64,12 +74,18 @@
         </div>
     </header>
 
-    <!-- Compact Hero Banner -->
+    <!-- Navigation Options Above Hero -->
+    <nav class="top-nav">
+        <a href="#products-section">🛍️ Products / ఉత్పత్తులు</a>
+        <a href="#tracking-section">📦 Track Order / ట్రాక్ చేయండి</a>
+    </nav>
+
+    <!-- Hero Banner -->
     <div class="hero-container">
         <img src="hero.jpg" alt="NPS Traders Banner" class="hero-banner" onerror="this.style.display='none'">
     </div>
 
-    <div class="container">
+    <div class="container" id="products-section">
         <!-- Products Section -->
         <h2>1. Select Products / ఉత్పత్తులను ఎంచుకోండి</h2>
         <div class="product-grid" id="productGrid">
@@ -122,12 +138,12 @@
             <label><strong>Upload Payment Screenshot / చెల్లింపు స్క్రీన్‌షాట్ అప్‌లోడ్ చేయండి:</strong></label>
             <input type="file" id="paymentFile" accept="image/*" required>
 
-            <button type="submit" class="submit-btn" style="margin-top: 10px;">Place Order / ఆర్డర్ చేయండి</button>
+            <button type="submit" id="submitBtn" class="submit-btn" style="margin-top: 10px;">Place Order / ఆర్డర్ చేయండి</button>
         </form>
     </div>
 
     <!-- Order Tracking -->
-    <div class="container">
+    <div class="container" id="tracking-section">
         <h2>3. Track Your Order / మీ ఆర్డర్‌ని ట్రాక్ చేయండి</h2>
         <label><strong>Enter Registered Phone Number / ఫోన్ నంబర్ నమోదు చేయండి:</strong></label>
         <input type="tel" id="trackPhone" placeholder="Enter phone number to track">
@@ -138,7 +154,7 @@
 
     <script>
         // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW
-        const API_URL = "https://script.google.com/macros/s/AKfycbyEH2YWPvMOWV6wP3bNDhTCWPgb982FdJ3TK0sY_wRxU_LwGwCkSFp8vUSt-g-IDSx3Zw/exec";
+        const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 
         const products = [
             { id: 1, name: "Agarbatti / అగర్బత్తి", price: 450, image: "agarbatti.jpg" },
@@ -173,7 +189,9 @@
             products.forEach(p => {
                 html += `
                     <div class="product-card">
-                        <img src="${p.image}" alt="${p.name}" onerror="this.src='logo.png'">
+                        <div class="img-box">
+                            <img src="${p.image}" alt="${p.name}" onerror="this.src='logo.png'">
+                        </div>
                         <h4>${p.name}</h4>
                         <p>₹${p.price}</p>
                         <div class="qty-controls">
@@ -214,6 +232,8 @@
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
+            let submitBtn = document.getElementById('submitBtn');
+
             let itemsArray = [];
             let grandTotal = 0;
             for (let id in cart) {
@@ -238,6 +258,10 @@
                 return;
             }
 
+            // Update button text to give feedback without blocking with alert
+            submitBtn.innerText = "Submitting Order... / సమర్పిస్తోంది...";
+            submitBtn.disabled = true;
+
             let reader = new FileReader();
             reader.onload = function(event) {
                 let base64String = event.target.result;
@@ -254,8 +278,6 @@
                     mimeType: file.type
                 };
 
-                alert("Submitting order, please wait...");
-
                 fetch(API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -265,6 +287,8 @@
                 .then(() => {
                     alert("Order placed successfully! / ఆర్డర్ విజయవంతంగా చేయబడింది!");
                     document.getElementById('orderForm').reset();
+                    submitBtn.innerText = "Place Order / ఆర్డర్ చేయండి";
+                    submitBtn.disabled = false;
                     for (let id in cart) {
                         cart[id] = 0;
                         let qtyEl = document.getElementById('qty-' + id);
@@ -272,7 +296,11 @@
                     }
                     updateCartSummary();
                 })
-                .catch(err => alert("Error: " + err));
+                .catch(err => {
+                    alert("Error: " + err);
+                    submitBtn.innerText = "Place Order / ఆర్డర్ చేయండి";
+                    submitBtn.disabled = false;
+                });
             };
             reader.readAsDataURL(file);
         });
